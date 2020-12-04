@@ -39,7 +39,14 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Day1Solver.cs" />
+        <Compile Include="Day2Solver.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj">
+        <Project>{3dcf9381-c721-4992-96bf-7ede086c0d5d}</Project>
+        <Name>Common</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

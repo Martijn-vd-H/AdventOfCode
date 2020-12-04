@@ -33,9 +33,27 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc">
+          <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="Moq, Version=4.15.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920">
+          <HintPath>..\packages\Moq.4.15.2\lib\net45\Moq.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="mscorlib" />
         <Reference Include="System" />
+        <Reference Include="System.Configuration" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+          <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+        <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+          <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
         <Reference Include="System.Xml" />
         <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
             <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
@@ -43,6 +61,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Day1Tests.cs" />
+        <Compile Include="Day2Tests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -50,11 +69,21 @@
         <Project>{40f6a0f5-8446-4674-a768-9be84091316a}</Project>
         <Name>Challenges</Name>
       </ProjectReference>
+      <ProjectReference Include="..\Common\Common.csproj">
+        <Project>{3dcf9381-c721-4992-96bf-7ede086c0d5d}</Project>
+        <Name>Common</Name>
+      </ProjectReference>
     </ItemGroup>
     <ItemGroup>
       <Content Include="Data\Day1.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="Data\Day2.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Challenges;
 using NUnit.Framework;
 
@@ -46,7 +45,7 @@ namespace Tests
         }
 
         [Test]
-        public void Day1BActual()
+        public void Day1PartTwoActual()
         {
             // Arrange
             var challengeSolver = new Day1Solver();
