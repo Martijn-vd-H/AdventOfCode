@@ -51,6 +51,7 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Data\Day7.txt" />
       <Content Include="Data\Day7TestData.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
