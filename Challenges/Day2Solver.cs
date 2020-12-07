@@ -6,7 +6,10 @@ using Common;
 
 namespace Challenges
 {
-    public class Day2Solver
+    /// <summary>
+    /// TDD
+    /// </summary>
+    public class Day2Solver : IDaySolver
     {
         private readonly IPasswordChecker _passwordChecker;
         private readonly IReader _reader;

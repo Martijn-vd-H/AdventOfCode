@@ -2,6 +2,9 @@
 
 namespace Challenges
 {
+    /// <summary>
+    /// TDD
+    /// </summary>
     public class Day1Solver
     {
         public int SolveDay1(List<int> testData)
