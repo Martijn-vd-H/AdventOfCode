@@ -22,7 +22,7 @@ namespace Challenges
                 //format: [Color] bags contain [amount] color bag(s) (,[amount] [color] bag(s).)*
                 var mainBagRegexMatch = Regex.Match(bagSpec, @"(.+) bags contain");
                 var color = mainBagRegexMatch.Groups[1].ToString();
-                var mainBag = new BagSpec(color, 0);
+                var mainBag = new BagSpec(color, 1);
                 var subBagsRegex = new Regex(@"(\d+) ([a-z\s]+)");
                 foreach (Match match in subBagsRegex.Matches(bagSpec))
                 {
@@ -35,22 +35,27 @@ namespace Challenges
             
             //Find shiny gold bags
             
-            var count = InterestingBagCount(bagSpecs, 0);
+            var count = InterestingBagCount(bagSpecs, 1);
             return count;
         }
 
-        private int InterestingBagCount(List<BagSpec> bagSpecs, int count)
+        private int InterestingBagCount(List<BagSpec> bagSpecs, int multiplier)
         {
             var goldBag = "shiny gold bag";
+            var count = 0;
             foreach (var bagSpec in bagSpecs)
             {
-                var directHit = bagSpec.Bags.FirstOrDefault(a => a.ColorName.Equals(goldBag));
-                if (directHit != null)
+                if (bagSpec.ColorName.Equals(goldBag))
                 {
-                    count += directHit.Amount;
+                    count += (bagSpec.Amount * multiplier);
                 }
+                // var directHit = bagSpec.Bags.FirstOrDefault(a => a.ColorName.Equals(goldBag));
+                // if (directHit != null)
+                // {
+                //     count += (directHit.Amount * multiplier);
+                // }
 
-                count = InterestingBagCount(bagSpec.Bags, count);
+                count += InterestingBagCount(bagSpec.Bags, bagSpec.Amount);
             }
 
             return count;

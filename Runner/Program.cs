@@ -11,7 +11,7 @@ namespace Runner
         public static void Main(string[] args)
         {
             var solver = new Day7Solver();
-            solver.Solve("Data\\Day7TestData.txt");
+            solver.Solve("Data\\Day7TestData - Copy.txt");
 
             if (false)
             {

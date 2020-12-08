@@ -52,6 +52,9 @@
     </ItemGroup>
     <ItemGroup>
       <Content Include="Data\Day7.txt" />
+      <Content Include="Data\Day7TestData - Copy.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Data\Day7TestData.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
