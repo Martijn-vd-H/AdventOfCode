@@ -11,37 +11,38 @@ namespace Challenges
     /// </summary>
     public class Day7Solver : IDaySolver
     {
+        private List<BagSpec> _bagSpecs;
+
         public int Solve(string pathToInput)
         {
             var input = System.IO.File.ReadAllLines(pathToInput);
 
             //Parse bag specifications
-            var bagSpecs = new List<BagSpec>();
+            _bagSpecs = new List<BagSpec>();
             foreach (var bagSpec in input)
             {
                 //format: [Color] bags contain [amount] color bag(s) (,[amount] [color] bag(s).)*
                 var mainBagRegexMatch = Regex.Match(bagSpec, @"(.+) bags contain");
                 var color = mainBagRegexMatch.Groups[1].ToString();
                 var mainBag = new BagSpec(color, 1);
-                var subBagsRegex = new Regex(@"(\d+) ([a-z\s]+)");
+                var subBagsRegex = new Regex(@"(\d+) ([a-z\s]+) bag");
                 foreach (Match match in subBagsRegex.Matches(bagSpec))
                 {
                     var amount = match.Groups[1];
                     var subColor = match.Groups[2];
                     mainBag.Bags.Add(new BagSpec(subColor.ToString(), Convert.ToInt32(amount.ToString())));
                 }
-                bagSpecs.Add(mainBag);
+                _bagSpecs.Add(mainBag);
             }
             
             //Find shiny gold bags
-            
-            var count = InterestingBagCount(bagSpecs, 1);
+            var count = GoldBagCount(_bagSpecs, 1);
             return count;
         }
 
-        private int InterestingBagCount(List<BagSpec> bagSpecs, int multiplier)
+        private int GoldBagCount(List<BagSpec> bagSpecs, int multiplier)
         {
-            var goldBag = "shiny gold bag";
+            var goldBag = "shiny gold";
             var count = 0;
             foreach (var bagSpec in bagSpecs)
             {
@@ -54,8 +55,11 @@ namespace Challenges
                 // {
                 //     count += (directHit.Amount * multiplier);
                 // }
-
-                count += InterestingBagCount(bagSpec.Bags, bagSpec.Amount);
+                var bagsToLookFor = _bagSpecs.FirstOrDefault(a => a.ColorName.Equals(bagSpec.ColorName));
+                if (bagsToLookFor != null)
+                {
+                    count += GoldBagCount(bagsToLookFor.Bags, bagSpec.Amount);
+                }
             }
 
             return count;
