@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Challenges
 {
     /// <summary>
     /// TDD
     /// </summary>
-    public class Day1Solver
+    public class Day1Solver : IDaySolver
     {
         public int SolveDay1(List<int> testData)
         {
@@ -45,6 +46,22 @@ namespace Challenges
             }
 
             return -1;
+        }
+
+        public List<string> GetSolutionStrings()
+        {
+            var data = System.IO.File.ReadAllLines(@"Data\Day1.txt");
+            var list = new List<int>();
+            foreach (var s in data)
+            {
+                list.Add(Convert.ToInt32(s));
+            }
+
+            return new List<string>
+            {
+                SolveDay1(list).ToString(),
+                SolveDay1B(list).ToString()
+            };
         }
     }
 }

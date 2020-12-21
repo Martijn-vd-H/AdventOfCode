@@ -116,5 +116,21 @@ namespace Challenges
                 return correctPasswords;
             }
         }
+        
+        
+        public List<string> GetSolutionStrings()
+        {
+            var solver1 = new Day2Solver(new FileReader(), new DataParser(), new PasswordChecker());
+            var result1 = solver1.Solve(@"Data\Day2.txt");
+            
+            var solver2 = new Day2Solver(new FileReader(), new DataParser(), new PasswordCheckerPartTwo());
+            var result2 = solver1.Solve(@"Data\Day2.txt");
+            
+            return new List<string>()
+            {
+                result1.ToString(),
+                result2.ToString()
+            };
+        }
     }
 }

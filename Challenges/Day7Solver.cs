@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Common;
 
 namespace Challenges
 {
     /// <summary>
-    /// Quick and Dirty
+    /// Quick and Dirty..Scratch that, slow and chaotic
     /// </summary>
     public class Day7Solver : IDaySolver
     {
@@ -123,6 +122,15 @@ namespace Challenges
                 Amount = amount;
                 Bags = new List<BagSpec>();
             }
+        }
+
+        public List<string> GetSolutionStrings()
+        {
+            return new List<string>()
+            {
+                Solve("Data\\Day7.txt").ToString(),
+                SolvePartTwo("Data\\Day7.txt").ToString()
+            };
         }
     }
 }

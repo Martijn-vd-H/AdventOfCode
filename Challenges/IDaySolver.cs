@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace Challenges
 {
     public interface IDaySolver
     {
-        int Solve(string pathToInput);
+        List<string> GetSolutionStrings();
     }
 }

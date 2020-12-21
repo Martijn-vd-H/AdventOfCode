@@ -40,6 +40,7 @@
     <ItemGroup>
         <Compile Include="Day1Solver.cs" />
         <Compile Include="Day2Solver.cs" />
+        <Compile Include="Day3Solver.cs" />
         <Compile Include="Day7Solver.cs" />
         <Compile Include="IDaySolver.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,13 +52,19 @@
       </ProjectReference>
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Data\Day1.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Data\Day2.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Data\Day3.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
       <Content Include="Data\Day7.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Data\Day7PartTwoTestData.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Data\Day7TestData - Copy.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <Content Include="Data\Day7TestData.txt">
