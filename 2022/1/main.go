@@ -14,14 +14,22 @@ func check(e error) {
 	}
 }
 
-func getMaxValue(s []int) int {
+func takeMaxValue(s []int) (int, []int) {
 	maxVal := 0
+	index := 0
 	for i := 0; i < len(s); i++ {
 		if s[i] > maxVal {
 			maxVal = s[i]
+			index = i
 		}
 	}
-	return maxVal
+
+	return maxVal, remove(s, index)
+}
+
+func remove(s []int, i int) []int {
+	s[i] = s[len(s)-1]
+	return s[:len(s)-1]
 }
 
 func main() {
@@ -31,7 +39,6 @@ func main() {
 	slice := make([]int, 0)
 	total := 0
 	for scanner.Scan() {
-
 		if scanner.Text() == "" {
 			slice = append(slice, total)
 			total = 0
@@ -42,5 +49,12 @@ func main() {
 		}
 	}
 
-	fmt.Println(getMaxValue(slice))
+	bigTotal := 0
+
+	for i := 0; i < 3; i++ {
+		total, slice = takeMaxValue(slice)
+		fmt.Println(total)
+		bigTotal += total
+	}
+	fmt.Println(bigTotal)
 }
