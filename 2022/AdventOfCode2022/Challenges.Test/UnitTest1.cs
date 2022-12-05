@@ -1,6 +1,6 @@
 namespace Challenges.Test;
 
-public class Tests
+public class Day2Tests
 {
     [Test]
     public void GetScoreShouldReturnGameScore()
@@ -19,7 +19,7 @@ public class Tests
         }
         
         //Act
-        var result = Day1.GetScore(InputReader);
+        var result = Day2.GetScore(InputReader);
         
         //Assert
         Assert.That(result, Is.EqualTo(expected));
@@ -28,7 +28,7 @@ public class Tests
     [Test]
     public void RunDay1()
     {
-        Assert.Fail(Day1.GetScoreFromInput().ToString());
+        Assert.That(Day2.GetScoreFromInput(), Is.LessThan(13637));
     }
     
     

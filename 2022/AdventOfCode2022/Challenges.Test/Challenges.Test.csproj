@@ -20,10 +20,4 @@
       <ProjectReference Include="..\Challenges\Challenges.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Update="input.txt">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>

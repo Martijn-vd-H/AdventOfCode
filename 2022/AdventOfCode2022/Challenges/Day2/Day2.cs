@@ -1,6 +1,6 @@
 ﻿namespace Challenges;
 
-public class Day1
+public class Day2
 {
     private static readonly Dictionary<string, int> ScoreList = new()
     {
@@ -17,7 +17,7 @@ public class Day1
         List<(string, string)> InputReader()
         {
             var listToReturn = new List<(string, string)>();
-            foreach (var line in File.ReadAllLines(@".\input.txt"))
+            foreach (var line in File.ReadAllLines(@".\Day1\input.txt"))
             {
                 var strings = line.Split(" ");
                 listToReturn.Add((strings[0], strings[1]));
