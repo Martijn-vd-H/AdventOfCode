@@ -4,20 +4,24 @@ public class Day2
 {
     private static readonly Dictionary<string, int> ScoreList = new()
     {
-        { "A", 1 },
-        { "B", 2 },
-        { "C", 3 },
-        { "X", 1 },
-        { "Y", 2 },
-        { "Z", 3 },
+        { "A", Rock },
+        { "B", Paper },
+        { "C", Scissors },
+        { "X", Rock },
+        { "Y", Paper },
+        { "Z", Scissors },
     };
+
+    private const int Rock = 1;
+    private const int Paper = 2;
+    private const int Scissors = 3;
 
     public static int GetScoreFromInput()
     {
         List<(string, string)> InputReader()
         {
             var listToReturn = new List<(string, string)>();
-            foreach (var line in File.ReadAllLines(@".\Day1\input.txt"))
+            foreach (var line in File.ReadAllLines(@".\Day2\input.txt"))
             {
                 var strings = line.Split(" ");
                 listToReturn.Add((strings[0], strings[1]));
@@ -42,23 +46,27 @@ public class Day2
 
     private static int CalculateScore((string, string) inputValue)
     {
-        var scoreElf = ScoreList[inputValue.Item1];
-        var scorePlayer = ScoreList[inputValue.Item2];
-        if (scorePlayer > scoreElf)
-        {
-            // win
-            return scorePlayer + 6;
-        }   
-        else if (scorePlayer < scoreElf)
+        var handElf = ScoreList[inputValue.Item1];
+        var handPlayer = ScoreList[inputValue.Item2];
+        
+        if (handElf == Rock && handPlayer == Scissors ||
+            handElf == Paper && handPlayer == Rock ||
+            handElf == Scissors && handPlayer == Paper)
         {
             // lose
-            return scorePlayer;
+            return handPlayer;
+        }   
+        else if (handElf == Scissors && handPlayer == Rock ||
+                  handElf == Paper && handPlayer == Scissors ||
+                  handElf == Rock && handPlayer == Paper)
+        {
+            // win
+            return handPlayer + 6;
         }
         else
         {
             //draw
-            return scorePlayer + 3;
+            return handPlayer + 3;
         }
     }
-    
 }

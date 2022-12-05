@@ -6,7 +6,7 @@ public class Day2Tests
     public void GetScoreShouldReturnGameScore()
     {
         //Arrange
-        var expected = 16;
+        var expected = 25;
         List<(string, string)> InputReader()
         {
             return new List<(string, string)>()
@@ -15,6 +15,7 @@ public class Day2Tests
                 ("B", "X"),
                 ("C", "Z"),
                 ("C", "X"),
+                ("A", "Z"),
             };
         }
         
@@ -28,7 +29,9 @@ public class Day2Tests
     [Test]
     public void RunDay1()
     {
-        Assert.That(Day2.GetScoreFromInput(), Is.LessThan(13637));
+        var scoreFromInput = Day2.GetScoreFromInput();
+        Console.WriteLine(scoreFromInput);
+        Assert.That(scoreFromInput, Is.LessThan(13637));
     }
     
     
