@@ -16,23 +16,6 @@ public class Day2
     private const int Paper = 2;
     private const int Scissors = 3;
 
-    public static int GetScoreFromInput()
-    {
-        List<(string, string)> InputReader()
-        {
-            var listToReturn = new List<(string, string)>();
-            foreach (var line in File.ReadAllLines(@".\Day2\input.txt"))
-            {
-                var strings = line.Split(" ");
-                listToReturn.Add((strings[0], strings[1]));
-            }
-
-            return listToReturn;
-        }
-        
-        return GetScore(InputReader);
-    }
-
     public static int GetScore(Func<List<(string, string)>> inputReader)
     {
         var total = 0;
@@ -48,17 +31,17 @@ public class Day2
     {
         var handElf = ScoreList[inputValue.Item1];
         var handPlayer = ScoreList[inputValue.Item2];
-        
+
         if (handElf == Rock && handPlayer == Scissors ||
             handElf == Paper && handPlayer == Rock ||
             handElf == Scissors && handPlayer == Paper)
         {
             // lose
             return handPlayer;
-        }   
+        }
         else if (handElf == Scissors && handPlayer == Rock ||
-                  handElf == Paper && handPlayer == Scissors ||
-                  handElf == Rock && handPlayer == Paper)
+                 handElf == Paper && handPlayer == Scissors ||
+                 handElf == Rock && handPlayer == Paper)
         {
             // win
             return handPlayer + 6;
@@ -68,5 +51,67 @@ public class Day2
             //draw
             return handPlayer + 3;
         }
+    }
+
+    public static int GetScorePart2(Func<List<(string, string)>> inputReader)
+    {
+        var total = 0;
+        foreach (var inputValue in inputReader())
+        {
+            if (inputValue.Item2 == "Y")
+            {
+                total += ScoreList[inputValue.Item1] + 3;
+            }
+            else if (inputValue.Item2 == "X")
+            {
+                total += GetHand(ScoreList[inputValue.Item1], GameResult.Lose);
+            }
+            else
+            {
+                total += GetHand(ScoreList[inputValue.Item1], GameResult.Win) + 6;
+            }
+        }
+
+        return total;
+    }
+
+    private enum GameResult
+    {
+        Win,
+        Lose,
+        Draw
+    }
+
+    private static int GetHand(int opponentHand, GameResult desiredGameResult)
+    {
+        if (opponentHand == Rock)
+        {
+            switch (desiredGameResult)
+            {
+                case GameResult.Win: return Paper;
+                case GameResult.Lose: return Scissors;
+                case GameResult.Draw: return Rock;
+            }
+        }
+        else if (opponentHand == Paper)
+        {
+            switch (desiredGameResult)
+            {
+                case GameResult.Win: return Scissors;
+                case GameResult.Lose: return Rock;
+                case GameResult.Draw: return Paper;
+            }
+        }
+        else
+        {
+            switch (desiredGameResult)
+            {
+                case GameResult.Win: return Rock;
+                case GameResult.Lose: return Paper;
+                case GameResult.Draw: return Scissors;
+            }
+        }
+
+        throw new ArgumentException(opponentHand + desiredGameResult.ToString());
     }
 }
