@@ -1,3 +1,5 @@
+using Challenges.Helpers;
+
 namespace Challenges.Day3;
 
 public class Day3
@@ -7,15 +9,23 @@ public class Day3
         var total = 0;
         foreach (var s in input)
         {
-            // TODO separate into utils class get half of string
-            var stringMid = (s.Length - 1) / 2;
-            var compartment1 = s.Substring(0, stringMid + 1);
-            var compartment2 = s.Substring(stringMid + 1, s.Length - stringMid - 1);
-            var duplicates = compartment1.Intersect(compartment2);
+            var splits = s.SplitStringInHalf();
+            var duplicates = splits[0].Intersect(splits[1]);
             foreach (var duplicate in duplicates)
             {
                 total += GetPriority(duplicate);
             }
+        }
+
+        return total;
+    }
+
+    public static int CalculateItemScorePart2(string[] input)
+    {
+        var total = 0;
+        for (var i = 0; i < input.Length; i+=3)
+        {
+            total += GetPriority((input[i].Intersect(input[i + 1]).Intersect(input[i+2])).Single());
         }
 
         return total;
