@@ -8,6 +8,7 @@ public class UnitTest1
     [InlineData("eightwothree", "8wo3")]
     [InlineData("7pqrstsixteen", "7pqrst6teen")]
     [InlineData("4nineeightseven2", "49872")]
+    [InlineData("35zrgthreetwonesz", "35zrg32nesz")]
     public void ReplaceWrittenNumbersWithActualNumbersTest(string input, string output)
     {
         var result = input.ReplaceWrittenNumbersWithActualNumbers();
