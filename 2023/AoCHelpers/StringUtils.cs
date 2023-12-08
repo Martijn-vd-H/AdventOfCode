@@ -1,6 +1,6 @@
 public static class StringUtils
 {
-    private static Dictionary<string, int> _numbersDictionary = new Dictionary<string, int>
+    public static Dictionary<string, int> NumbersDictionary = new Dictionary<string, int>
     {
         {"one", 1},
         {"two", 2},
@@ -18,7 +18,7 @@ public static class StringUtils
         var index = 1000; // Just a number that is higher than any input we might receive
         var firstNumberToReplace = "";
         var hasNumbersToReplace = false;
-        foreach (var number in _numbersDictionary.Keys)
+        foreach (var number in NumbersDictionary.Keys)
         {
             var currentIndex = input.IndexOf(number);
 
@@ -31,7 +31,7 @@ public static class StringUtils
         }
         if (hasNumbersToReplace)
         {
-            var replacedString = _numbersDictionary[firstNumberToReplace].ToString();
+            var replacedString = NumbersDictionary[firstNumberToReplace].ToString();
             return ReplaceWrittenNumbersWithActualNumbers(input.Replace(firstNumberToReplace, replacedString));
         }
         else
@@ -47,5 +47,16 @@ public static class StringUtils
         Array.Reverse(charArray);
         return new string(charArray);
     }
+
+    public static IEnumerable<int> AllIndexesOf(this string str, string searchstring)
+    {
+        int minIndex = str.IndexOf(searchstring);
+        while (minIndex != -1)
+        {
+            yield return minIndex;
+            minIndex = str.IndexOf(searchstring, minIndex + searchstring.Length);
+        }
+    }
+
 }
 
