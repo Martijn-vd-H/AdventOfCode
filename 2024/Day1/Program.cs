@@ -7,7 +7,7 @@ CalculateTotalDistance("TestInput1").Should().Be(11);
 CalculateTotalDistance("InputPart1").Should().Be(1506483);
 
 CalculateSimilarity("TestInput1").Should().Be(31);
-CalculateSimilarity("InputPart1").Should().Be(31);
+CalculateSimilarity("InputPart1").Should().Be(23126924);
 Console.WriteLine("Great succes!");
 return;
 
