@@ -30,6 +30,12 @@ public class CalculatorBenchmarks
     [Benchmark]
     public void Part1()
     {
+        Calculators.CalculateTotalDistance(Data.Item1, Data.Item2);
+    }
+    
+    [Benchmark]
+    public void Part2()
+    {
         Calculators.CalculateSimilarity(Data.Item1, Data.Item2);
     }
 }
