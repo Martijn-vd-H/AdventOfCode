@@ -31,16 +31,14 @@ int CalculateMultiplicationsWithConditionals(string filename)
     var enabled = true;
     foreach (Match match in matches)
     {
-        if (match.Value.Equals("don't()"))
+        switch (match.Value)
         {
-            enabled = false;
-            continue;
-        }
-
-        if (match.Value.Equals("do()"))
-        {
-            enabled = true;
-            continue;
+            case "don't()":
+                enabled = false;
+                continue;
+            case "do()":
+                enabled = true;
+                continue;
         }
 
         if (enabled)
