@@ -1,5 +1,5 @@
 ﻿// Alle regels lezen
-var path = "TestInput1";
+var path = "InputPart1";
 var lines = System.IO.File.ReadAllLines(path);
 
 // Langste regel tellen
