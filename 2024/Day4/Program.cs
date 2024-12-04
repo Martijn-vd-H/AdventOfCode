@@ -1,91 +1,46 @@
 ﻿// Alle regels lezen
-using System.Net.Sockets;
-
 var path = "TestInput1";
 var lines = System.IO.File.ReadAllLines(path);
 
 // Langste regel tellen
 var length = lines.Max(line => line.Length);
-var height = lines.Length;
 
-// 2D array maken met max lengte regel en aantal regels
-// var array = new char[length, height];
-// for (int i = 0; i < height; i++)
-// {
-//     var line = lines[i];
-//     for (int j = 0; j < length; j++)
-//     {
-//         array[i, j] = line[j];
-//     }
-// }
-
-// Zoek naar X
 var totalCount = 0;
 
-for (int i = 0; i < height; i++)
+var offsetPlans = new List<OffsetPlan>
 {
-    var line = lines[i];
-    for (int j = 0; j < length; j++)
+    new(new Offset(0, 0), new Offset(1, 0), new Offset(2, 0), new Offset(3, 0)), // right
+    new(new Offset(0, 0), new Offset(-1, 0), new Offset(-2, 0), new Offset(-3, 0)), // left
+    new(new Offset(0, 0), new Offset(0, 1), new Offset(0, 2), new Offset(0, 3)), // up
+    new(new Offset(0, 0), new Offset(0, -1), new Offset(0, -2), new Offset(0, -3)), // down
+    new(new Offset(0, 0), new Offset(-1, 1), new Offset(-2, 2), new Offset(-3, 3)), // leftup
+    new(new Offset(0, 0), new Offset(1, 1), new Offset(2, 2), new Offset(3, 3)), // rightup
+    new(new Offset(0, 0), new Offset(-1, -1), new Offset(-2, -2), new Offset(-3, -3)), // leftdown
+    new(new Offset(0, 0), new Offset(1, -1), new Offset(2, -2), new Offset(3, -3)), // rightdown
+};
+
+
+for (int verticalIndex = 0; verticalIndex < lines.Length; verticalIndex++)
+{
+    var line = lines[verticalIndex];
+    for (int horizontalIndex = 0; horizontalIndex < length; horizontalIndex++)
     {
-        if (line[j] == 'X')
+        if (line[horizontalIndex] == 'X')
         {
-            // Search right
-            if (j + 4 < line.Length)
+            foreach (var offsetPlan in offsetPlans)
             {
-                var sub = line.Substring(j, 4);
-                if (sub.Equals("XMAS"))
+                try
                 {
-                    totalCount++;
-                }
-            }
+                    string sub = "" + lines[verticalIndex + offsetPlan.one.y][horizontalIndex + offsetPlan.one.x] +
+                    lines[verticalIndex + offsetPlan.two.y][horizontalIndex + offsetPlan.two.x] +
+                    lines[verticalIndex + offsetPlan.three.y][horizontalIndex + offsetPlan.three.x] +
+                    lines[verticalIndex + offsetPlan.four.y][horizontalIndex + offsetPlan.four.x];
 
-            // Search left
-            if (j - 4 >= 0)
-            {
-                var sub = line.Substring(j - 4, 4);
-                if (sub.Equals("SAMX"))
-                {
-                    totalCount++;
+                    if (sub.Equals("XMAS")) totalCount++;
                 }
-            }
-
-            // Search up
-            if (i > 3)
-            {
-                var upString = $"{lines[i][j]}{lines[i - 1][j]}{lines[i - 2][j]}{lines[i - 3][j]}";
-                if (upString.Equals("XMAS"))
+                catch (IndexOutOfRangeException)
                 {
-                    totalCount++;
-                }
-            }
-
-            // Search down
-            if (i + 3 < lines.Length)
-            {
-                var upString = $"{lines[i][j]}{lines[i + 1][j]}{lines[i + 2][j]}{lines[i + 3][j]}";
-                if (upString.Equals("XMAS"))
-                {
-                    totalCount++;
-                }
-            }
-
-            // Search diagonal left up
-            if (i > 3 && j - 4 >= 0)
-            {
-                var diagString = $"{lines[i][j]}{lines[i - 1][j - 1]}{lines[i - 2][j - 2]}{lines[i - 3][j - 3]}";
-                if (diagString.Equals("XMAS"))
-                {
-                    totalCount++;
-                }
-            }
-
-            // Search diagonal left up
-            if (i > 3 && j - 4 >= 0)
-            {
-                var diagString = $"{lines[i][j]}{lines[i - 1][j - 1]}{lines[i - 2][j - 2]}{lines[i - 3][j - 3]}";
-                if (diagString.Equals("XMAS"))
-                {
-                    totalCount++;
+                    continue;
                 }
             }
         }
@@ -94,8 +49,5 @@ for (int i = 0; i < height; i++)
 
 System.Console.WriteLine(totalCount);
 
-
-// Bij het vinden van X kijk naar links, naar rechts, naar boven, naar onder
-// Pak 4 letters, als dat kan (max length en 0 zijn grenzen). check of het XMAS is.
-
-// Kijk diagonaal. Dus 1 naar boven, 1 naar links. Of 1 naar onder 1 naar rechts.
+record OffsetPlan(Offset one, Offset two, Offset three, Offset four);
+record Offset(int x, int y);
